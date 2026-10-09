@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Comercial · Gestão de Performance &amp; Tecnologia · Cláudia Santana</title>
+<meta name="description" content="Proposta de prestação de serviços de gestão de performance e tecnologia para Cláudia Santana.">
+<meta name="theme-color" content="#030304">
+<meta property="og:title" content="Proposta Comercial · Cláudia Santana">
+<meta property="og:description" content="Gestão de performance e tecnologia para captação de clientes do mercado imobiliário em Feira de Santana e região.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+
+  :root {
+    color-scheme: dark;
+    --bg: #030304;
+    --card: rgba(14, 14, 18, 0.75);
+    --card-hover: rgba(22, 22, 29, 0.85);
+    --line: rgba(255, 255, 255, 0.08);
+    --line-bright: rgba(255, 255, 255, 0.18);
+    --w: #ffffff;
+    --t: #f4f4f6;
+    --m: #9a9ab0;
+    --f: #8b8ba0;
+    --g: #a8e83e;
+    --g-glow: rgba(168, 232, 62, 0.35);
+    --g-dark: #0b1300;
+    --accent-blue: #38bdf8;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+    --pad: clamp(70px, 10vw, 140px);
+    --gut: clamp(16px, 4.5vw, 64px);
+    --max: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--t);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Canvas 3D Background */
+  #webgl-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .page { position: relative; z-index: 1; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
+  section { padding: var(--pad) 0; position: relative; }
+  .rule { height: 1px; width: 100%; max-width: var(--max); margin: 0 auto; background: linear-gradient(90deg, transparent, var(--line-bright) 15%, var(--line-bright) 85%, transparent); }
+
+  /* Pill & Badges */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(168, 232, 62, 0.3);
+    background: rgba(168, 232, 62, 0.04);
+    backdrop-filter: blur(12px);
+    border-radius: 999px;
+    padding: 8px 18px 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--g);
+    box-shadow: 0 0 20px rgba(168, 232, 62, 0.08);
+  }
+  .pill i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--g);
+    display: block;
+    box-shadow: 0 0 12px var(--g);
+    animation: pulse 2s infinite ease-in-out;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(0.85); } }
+
+  /* Typography */
+  h1 { font-size: clamp(36px, 6vw, 74px); line-height: 1.03; letter-spacing: -.04em; font-weight: 800; margin: 24px 0 0; color: var(--w); text-wrap: balance; }
+  h2 { font-size: clamp(26px, 3.8vw, 46px); line-height: 1.12; letter-spacing: -.035em; font-weight: 700; margin: 20px 0 0; color: var(--w); text-wrap: balance; }
+  h3 { font-size: 20px; line-height: 1.3; letter-spacing: -.02em; font-weight: 700; margin: 0; color: var(--w); }
+  .sub { color: var(--m); font-size: clamp(16px, 2.2vw, 18px); line-height: 1.6; max-width: 64ch; margin: 20px 0 0; font-weight: 400; }
+  .head { margin-bottom: 52px; }
+  .section-mark { display: block; text-align: center; font-family: var(--sans); font-weight: 800; font-size: clamp(46px, 9vw, 120px); line-height: 1; letter-spacing: -.04em; color: rgba(255,255,255,0.05); text-shadow: 0 0 70px rgba(168,232,62,0.16); pointer-events: none; user-select: none; margin: 0 0 -6px; }
+  p { margin: 0; color: var(--m); }
+  strong { color: var(--w); font-weight: 600; }
+  .gr { color: var(--g); }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* Glassmorphism Cards */
+  .card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--card);
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+    transition: all .35s cubic-bezier(.22, 1, .36, 1);
+  }
+  .card:hover {
+    border-color: var(--line-bright);
+    background: var(--card-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .glow {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--g-glow) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.6;
+    transition: opacity .4s ease, left .2s ease;
+  }
+
+  /* Hero Section */
+  .hero { padding-top: clamp(90px, 14vh, 150px); padding-bottom: clamp(50px, 7vw, 90px); }
+  .fiche { margin-top: 44px; padding: clamp(24px, 3.5vw, 40px); border-color: rgba(255,255,255,0.12); }
+  .fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px 28px; margin: 0; }
+  .fgrid dt { font-family: var(--mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--f); margin: 0 0 8px; font-weight: 600; }
+  .fgrid dd { margin: 0; font-size: 15.5px; color: var(--t); line-height: 1.4; font-weight: 600; }
+
+  /* Diagnóstico: oito passos em ordem de funil, X marca o problema, check marca o ideal */
+  .diag-list { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+  .diag-row {
+    padding: 30px 28px;
+    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.055);
+    background: linear-gradient(rgba(255,255,255,0.022), rgba(255,255,255,0.022)), rgba(9,9,12,0.55);
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .diag-row:hover { border-color: rgba(255,255,255,0.1); background: linear-gradient(rgba(255,255,255,0.035), rgba(255,255,255,0.035)), rgba(9,9,12,0.6); }
+  .diag-tag { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--f); font-weight: 700; margin-bottom: 12px; }
+  .diag-title { font-size: 19px; margin: 0 0 12px; letter-spacing: -.015em; }
+  .diag-context { font-size: 14px; color: var(--m); line-height: 1.6; margin: 0 0 20px; }
+  .diag-way { display: flex; gap: 13px; align-items: flex-start; margin-top: 12px; padding: 14px 16px; border-radius: 12px; border: 1px solid transparent; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .diag-way.now { background: linear-gradient(rgba(224,102,95,0.07), rgba(224,102,95,0.07)), rgba(10,10,13,0.72); border-color: rgba(224,102,95,0.14); }
+  .diag-way.ideal { background: linear-gradient(rgba(168,232,62,0.07), rgba(168,232,62,0.07)), rgba(10,10,13,0.72); border-color: rgba(168,232,62,0.16); }
+  .diag-mark { width: 19px; height: 19px; flex: none; margin-top: 3px; }
+  .diag-way .dw-label { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; margin-bottom: 5px; }
+  .diag-way.now .dw-label { color: #cba39f; }
+  .diag-way.ideal .dw-label { color: #d7f0ac; }
+  .diag-way p { font-size: 13.5px; line-height: 1.62; margin: 0; }
+  .diag-way.now p { color: #c9a8a5; }
+  .diag-way.ideal p { color: #d7f0ac; }
+  .diag-way.ideal .hl { color: #d7f0ac; font-weight: 700; }
+
+  /* Interactive Chart Section */
+  .panel { margin-top: 44px; border: 1px solid var(--line); border-radius: 28px; background: rgba(10, 10, 14, 0.85); backdrop-filter: blur(20px); padding: clamp(24px, 3.5vw, 44px); position: relative; overflow: hidden; }
+  
+  /* Gráfico de comissão mês a mês, empilhado por tipo de venda */
+  .mixchart { margin-top: 8px; }
+  .mixlegend { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-bottom: 30px; font-family: var(--mono); font-size: 11.5px; color: var(--m); }
+  .mixlegend span { display: inline-flex; align-items: center; gap: 9px; }
+  .mixlegend i { width: 13px; height: 13px; border-radius: 4px; display: block; }
+  .mixlegend i.pf { background: rgba(168,232,62,.26); border: 1px solid rgba(168,232,62,.4); }
+  .mixlegend i.emp { background: var(--g); box-shadow: 0 0 10px var(--g-glow); }
+
+  .mixgrid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 4vw, 56px); align-items: end; padding-bottom: 0; }
+  .mixlines { position: absolute; left: 0; right: 0; top: 36px; bottom: 72px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+  .mixlines span { display: block; height: 1px; background: rgba(255,255,255,0.05); }
+  .mixcol { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  .mixval { font-family: var(--mono); font-size: clamp(15px, 2vw, 20px); font-weight: 800; color: var(--w); margin-bottom: 12px; letter-spacing: -.02em; }
+  .mixbar { width: 100%; max-width: 108px; height: 240px; display: flex; align-items: flex-end; }
+  .mixstack { width: 100%; display: flex; flex-direction: column; justify-content: flex-end; border-radius: 8px 8px 2px 2px; overflow: hidden; min-height: 6px; transition: height 1.2s cubic-bezier(.22,1,.36,1); }
+  .mixstack.tall { box-shadow: 0 0 34px rgba(168,232,62,.28); }
+  .seg { width: 100%; transition: height 1.2s cubic-bezier(.22,1,.36,1); }
+  .seg-emp { background: linear-gradient(180deg, #b8f24a 0%, var(--g) 100%); }
+  .seg-pf { background: linear-gradient(180deg, rgba(168,232,62,.34) 0%, rgba(168,232,62,.18) 100%); }
+  .mixfoot { margin-top: 16px; text-align: center; padding-top: 14px; border-top: 1px solid var(--line); width: 100%; }
+  .mixfoot .mlab { font-family: var(--mono); font-size: 12px; color: var(--t); font-weight: 700; display: block; letter-spacing: .04em; }
+  .mixfoot .msub { font-size: 11.5px; color: var(--m); display: block; margin-top: 6px; line-height: 1.5; }
+
+  /* Novo Roadmap Glassmorphism de Execução */
+  .rm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .rm-card {
+    background: rgba(14, 14, 20, 0.78) !important;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease;
+  }
+
+  .rm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.2));
+  }
+
+  .rm-card.featured::before {
+    background: linear-gradient(90deg, rgba(168, 232, 62, 0.4), var(--g));
+  }
+
+  .rm-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(18, 18, 26, 0.85) !important;
+    transform: translateY(-3px);
+  }
+
+  .rm-card.featured {
+    border-color: rgba(168, 232, 62, 0.4);
+    background: linear-gradient(180deg, rgba(168, 232, 62, 0.05) 0%, rgba(12, 16, 10, 0.85) 100%) !important;
+    box-shadow: 0 0 40px rgba(168, 232, 62, 0.06);
+  }
+
+  .rm-card .rm-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .rm-card .rm-step-badge {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--g);
+    font-weight: 700;
+  }
+
+  .rm-card .rm-period {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--m);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .rm-card.featured .rm-period {
+    background: rgba(168, 232, 62, 0.14);
+    color: var(--g);
+    border: 1px solid rgba(168, 232, 62, 0.3);
+  }
+
+  .rm-card h3 {
+    font-size: 16.5px;
+    color: var(--w);
+    margin: 10px 0 0;
+    line-height: 1.38;
+    letter-spacing: -.015em;
+  }
+
+  .rm-card p {
+    font-size: 13px;
+    color: var(--m);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .rm-card .rm-milestone {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .rm-card.featured .rm-milestone {
+    border-color: rgba(168, 232, 62, 0.25);
+    background: rgba(168, 232, 62, 0.05);
+  }
+
+  .rm-card .rm-milestone .m-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--f);
+    font-weight: 700;
+  }
+
+  .rm-card.featured .rm-milestone .m-label {
+    color: var(--g);
+  }
+
+  .rm-card .rm-milestone .m-desc {
+    font-size: 12px;
+    color: var(--t);
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 1024px) {
+    .rm-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .rm-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .rm-card {
+      padding: 20px 16px;
+    }
+  }
+
+  .gapnote { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .gapnote .v { font-size: clamp(24px, 3.2vw, 36px); letter-spacing: -.04em; color: var(--w); font-weight: 800; line-height: 1; font-family: var(--mono); }
+  .gapnote .v.dimv { color: #525262; }
+  .gapnote .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--f); margin-top: 12px; display: block; line-height: 1.6; }
+
+  /* Funnel Section */
+
+  /* Frentes de Atuação Agrupadas em Grid (6 Frentes) */
+  /* Frentes em cards com icone */
+  .front-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin-top: 8px; }
+  .front-card { padding: 32px 28px; display: flex; flex-direction: column; }
+  .front-card .tag-hdr { font-family: var(--mono); font-size: 11px; color: var(--g); letter-spacing: .15em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+  .front-card h3 { font-size: 20px; margin-bottom: 12px; letter-spacing: -.02em; line-height: 1.3; }
+  .front-card > p { font-size: 14px; color: var(--m); line-height: 1.6; margin-bottom: 22px; }
+  .front-card .incl { list-style: none; margin: 0; padding: 20px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .front-card .incl li { display: grid; grid-template-columns: 18px 1fr; gap: 11px; font-size: 13.5px; line-height: 1.5; color: var(--m); align-items: start; }
+  .front-card .incl li .ic { width: 18px; height: 18px; margin-top: 2px; flex: none; }
+
+
+  /* Ancoragem de Custo & Overdelivery (Hormozi Style) */
+  .anch-box { margin-top: 44px; border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: rgba(14, 14, 18, 0.8); }
+  .ar { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 18px 28px; border-bottom: 1px solid var(--line); align-items: center; }
+  .ar .l { font-size: 15.5px; color: var(--t); }
+  .ar .l em { font-style: normal; color: var(--f); font-size: 12.5px; display: block; margin-top: 3px; font-family: var(--mono); }
+  .ar .v { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 15.5px; color: var(--m); white-space: nowrap; font-weight: 600; }
+  .ar.sum { background: rgba(255,255,255,0.03); }
+  .ar.sum .l { color: var(--w); font-weight: 700; font-size: 16.5px; }
+  .ar.sum .v { color: var(--w); font-size: 19px; font-weight: 800; }
+  .ar.you { background: var(--g); border-bottom: none; }
+  .ar.you .l { color: var(--g-dark); font-weight: 800; font-size: 17.5px; }
+  .ar.you .l em { color: rgba(11,19,0,0.75); font-weight: 600; }
+  .ar.you .v { color: var(--g-dark); font-size: 23px; font-weight: 900; }
+
+  /* Pricing Cards */
+  .prices { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; align-items: stretch; position: relative; z-index: 1; }
+  .price { padding: 34px 28px 30px; display: flex; flex-direction: column; background: rgba(12, 12, 16, 0.65) !important; backdrop-filter: blur(7px) saturate(130%); -webkit-backdrop-filter: blur(7px) saturate(130%); border: 1px solid var(--line); border-radius: 28px; }
+  .price.best { border-color: rgba(168,232,62,0.45); box-shadow: 0 0 80px rgba(168,232,62,0.08); background: rgba(15, 22, 12, 0.72) !important; }
+  .price.best::before { background: linear-gradient(90deg, transparent, rgba(168,232,62,0.8), transparent); }
+  .ptop { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .price .tier { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--m); font-weight: 700; }
+  .price .tag { font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--g-dark); background: var(--g); border-radius: 999px; padding: 5px 12px; font-weight: 800; }
+  .price .role { font-size: 14px; color: var(--m); margin: 16px 0 0; min-height: 60px; line-height: 1.55; }
+  
+  .amt { display: flex; align-items: flex-end; gap: 8px; margin: 22px 0 0; }
+  .amt .n { font-size: clamp(38px, 4.5vw, 48px); line-height: .95; letter-spacing: -.05em; color: var(--w); font-weight: 800; font-family: var(--mono); }
+  .amt .cur { font-size: 19px; color: var(--m); font-weight: 400; padding-bottom: 5px; }
+  .amt .per { font-family: var(--mono); font-size: 12px; color: var(--f); letter-spacing: .05em; padding-bottom: 7px; }
+  
+  .impl { font-family: var(--mono); font-size: 12.5px; color: var(--m); margin-top: 18px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
+  .impl b { color: var(--w); font-weight: 700; }
+  
+  .tot90 { font-family: var(--mono); font-size: 13px; color: var(--g); margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; background: rgba(168,232,62,0.08); padding: 9px 12px; border-radius: 8px; border: 1px solid rgba(168,232,62,0.2); }
+
+  .price ul { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 13px; flex: 1; }
+  .price li { display: grid; grid-template-columns: 18px 1fr; gap: 11px; font-size: 13.8px; color: var(--m); line-height: 1.5; align-items: start; }
+  .price li svg { width: 18px; height: 18px; margin-top: 2px; flex: none; }
+  .price li.off { color: #404050; }
+
+  /* Bônus Exclusivos Section (6 Bônus Robustos) */
+  .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+  .bonus-card { padding: 28px; border: 1px dashed rgba(168,232,62,0.35); background: rgba(168,232,62,0.03); }
+  .bonus-card .badge-b { font-family: var(--mono); font-size: 10.5px; color: var(--g); letter-spacing: .15em; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: block; }
+  .bonus-card h4 { font-size: 18.5px; margin: 0 0 10px; color: var(--w); }
+  .bonus-card p { font-size: 14px; color: var(--m); line-height: 1.55; }
+  .bonus-card .val { font-family: var(--mono); font-size: 12px; color: var(--f); margin-top: 16px; display: block; text-decoration: line-through; }
+
+  /* Seção Garantia Contratual (Glassmorphism & High-Converting Copy) */
+  .guar-container {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .guar-glass-box {
+    background: rgba(14, 14, 20, 0.78) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .guar-glass-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168, 232, 62, 0.6), transparent);
+  }
+
+  .guar-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .guar-card {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all .3s ease;
+  }
+
+  .guar-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(15, 15, 22, 0.65);
+    transform: translateY(-3px);
+  }
+
+  .guar-card.featured {
+    border-color: rgba(168, 232, 62, 0.4);
+    background: linear-gradient(180deg, rgba(168, 232, 62, 0.06) 0%, rgba(0, 0, 0, 0.5) 100%);
+    box-shadow: 0 0 35px rgba(168, 232, 62, 0.06);
+  }
+
+  .guar-card .gc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .guar-card .gc-tier {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--m);
+    font-weight: 700;
+  }
+
+  .guar-card.featured .gc-tier {
+    color: var(--g);
+  }
+
+  .guar-card .gc-badge {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--f);
+    font-weight: 700;
+  }
+
+  .guar-card.featured .gc-badge {
+    background: rgba(168, 232, 62, 0.16);
+    color: var(--g);
+    border: 1px solid rgba(168, 232, 62, 0.3);
+  }
+
+  .guar-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .guar-card li {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--m);
+    line-height: 1.5;
+    align-items: start;
+  }
+
+  .guar-card li svg {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    flex: none;
+  }
+
+  .guar-card li strong {
+    color: var(--w);
+    font-weight: 600;
+  }
+
+  .guar-shield-callout {
+    margin-top: 28px;
+    padding: 24px 28px;
+    border-radius: 20px;
+    border: 1px solid rgba(168, 232, 62, 0.3);
+    background: linear-gradient(135deg, rgba(168, 232, 62, 0.08) 0%, rgba(10, 14, 8, 0.6) 100%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .guar-shield-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: rgba(168, 232, 62, 0.15);
+    border: 1px solid rgba(168, 232, 62, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    box-shadow: 0 0 20px rgba(168, 232, 62, 0.15);
+  }
+
+  .guar-shield-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--g);
+  }
+
+  .guar-shield-text h5 {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--g);
+    margin: 0 0 6px;
+    font-weight: 800;
+  }
+
+  .guar-shield-text p {
+    font-size: 14.5px;
+    color: var(--t);
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .guar-glass-box { padding: 24px 18px; }
+    .guar-shield-callout { flex-direction: column; text-align: center; }
+  }
+  
+  /* Escada de fases sempre visível (substitui o antigo seletor escondido) */
+  .ladder-strip { display: flex; flex-direction: column; gap: 12px; }
+  .ladder-step { display: grid; grid-template-columns: 118px 1fr 132px; gap: 18px; align-items: center; border: 1px solid transparent; background: none; border-radius: 12px; padding: 6px 10px 6px 0; cursor: pointer; text-align: left; font-family: var(--sans); transition: all .2s ease; width: 100%; }
+  .ladder-step:hover { border-color: var(--line); }
+  .ladder-step .lstep-days { font-family: var(--mono); font-size: 11.5px; color: var(--m); letter-spacing: .04em; font-weight: 500; padding-left: 12px; }
+  .lstep-track { display: block; height: 46px; border-radius: 11px; background: #0b0b10; border: 1px solid var(--line); overflow: hidden; }
+  .lstep-fill { display: flex; align-items: center; height: 100%; border-radius: 11px; padding-left: 18px; background: linear-gradient(90deg, rgba(168,232,62,0.22), rgba(168,232,62,0.5)); font-family: var(--mono); font-size: 13px; font-weight: 800; color: var(--w); white-space: nowrap; transition: filter .2s ease; }
+  .lstep-fill.max { background: var(--g); color: var(--g-dark); box-shadow: 0 0 24px rgba(168,232,62,0.35); }
+  .ladder-step .lstep-sub { font-family: var(--mono); font-size: 12px; color: var(--m); text-align: right; font-weight: 600; }
+  .ladder-step.active .lstep-days { color: var(--t); font-weight: 700; }
+  .ladder-step.active .lstep-sub { color: var(--g); font-weight: 800; }
+  .ladder-step.active .lstep-fill { filter: brightness(1.25); }
+  .ladder-step.active { border-color: rgba(168,232,62,0.28); }
+  @media (max-width: 640px) {
+    .ladder-step { grid-template-columns: 1fr; gap: 6px; padding: 10px; }
+    .ladder-step .lstep-days { padding-left: 0; }
+    .ladder-step .lstep-sub { text-align: left; }
+  }
+
+  /* Dashboard Futurista UI (Hero) */
+  .dash-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 24px; }
+  .dash-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .dash-kpi-card { background: rgba(0,0,0,0.4); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; }
+  .dash-kpi-card .lbl { font-family: var(--mono); font-size: 10px; color: var(--f); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 20px; display: flex; align-items: center; }
+  .dash-kpi-card .val { font-family: var(--mono); font-size: 22px; font-weight: 800; color: var(--w); margin-top: 6px; }
+  .dash-kpi-card .val.grn { color: var(--g); }
+  .dash-kpi-card .subt { font-size: 11.5px; color: var(--m); margin-top: 4px; display: block; }
+  
+  /* Paineis de projecao financeira */
+  .proj-box { background: rgba(0,0,0,0.4); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px; display: flex; flex-direction: column; }
+  .proj-box h4 { font-size: 13px; font-family: var(--mono); color: var(--w); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 24px; display: flex; align-items: center; gap: 9px; font-weight: 700; }
+  .proj-box h4 i { width: 7px; height: 7px; border-radius: 50%; background: var(--g); box-shadow: 0 0 9px var(--g); flex: none; }
+
+  .roi-rows { display: flex; flex-direction: column; gap: 18px; }
+  .roi-row { display: grid; grid-template-columns: 132px 1fr 96px; gap: 14px; align-items: center; }
+  .roi-lab { font-family: var(--mono); font-size: 11px; color: var(--m); letter-spacing: .04em; }
+  .roi-track { height: 26px; border-radius: 7px; background: #0b0b10; border: 1px solid var(--line); overflow: hidden; }
+  .roi-fill { height: 100%; width: 0; border-radius: 7px; transition: width 1.1s cubic-bezier(.22,1,.36,1); }
+  .roi-fill.inv { background: rgba(255,255,255,0.14); }
+  .roi-fill.ret { background: linear-gradient(90deg, rgba(168,232,62,.45), var(--g)); box-shadow: 0 0 20px rgba(168,232,62,.3); }
+  .roi-val { font-family: var(--mono); font-size: 13.5px; font-weight: 800; color: var(--t); text-align: right; }
+  .roi-val.grn { color: var(--g); }
+
+  .roi-foot { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); }
+  .roi-foot > div { flex: 1; min-width: 130px; }
+  .roi-mult { display: block; font-family: var(--mono); font-size: clamp(30px, 4vw, 42px); font-weight: 800; color: var(--g); line-height: 1; letter-spacing: -.03em; }
+  .roi-nval { display: block; font-family: var(--mono); font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: var(--t); line-height: 1; letter-spacing: -.03em; }
+  .roi-mlab { display: block; font-family: var(--mono); font-size: 10px; color: var(--f); text-transform: uppercase; letter-spacing: .12em; margin-top: 10px; line-height: 1.5; }
+
+  .acc-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: end; height: 140px; }
+  .acc-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; cursor: default; }
+  .acc-bar { width: 100%; max-width: 54px; height: 0; background: rgba(168,232,62,.2); border-radius: 6px 6px 0 0; transition: height 1.1s cubic-bezier(.22,1,.36,1), background .4s ease, box-shadow .4s ease; }
+  .acc-col.active .acc-bar { background: linear-gradient(180deg, var(--g), rgba(168,232,62,.45)); box-shadow: 0 0 22px rgba(168,232,62,.35); }
+  .acc-v { font-family: var(--mono); font-size: 12px; font-weight: 800; color: var(--m); margin-top: 9px; }
+  .acc-col.active .acc-v { color: var(--g); }
+  .acc-l { font-family: var(--mono); font-size: 10px; color: var(--f); text-transform: uppercase; letter-spacing: .1em; margin-top: 3px; }
+
+  .acc-total { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 11px; }
+  .acc-tline { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12.5px; color: var(--m); }
+  .acc-tline strong { font-family: var(--mono); font-size: 13.5px; color: var(--t); font-weight: 800; white-space: nowrap; }
+  .acc-tline.sum { padding-top: 11px; border-top: 1px solid var(--line); }
+  .acc-tline.sum strong { font-size: 17px; }
+  .acc-tline strong.grn { color: var(--g); }
+
+  @media (max-width: 900px) { .dash-grid { grid-template-columns: 1fr; } }
+
+  /* Tabela de Simulação Financeira em 90 dias */
+  .sim-box { margin-top: 40px; border: 1px solid var(--line); border-radius: 24px; background: rgba(10,10,14,0.85); backdrop-filter: blur(20px); padding: 32px; }
+
+  /* Cards de sobra liquida por plano (bloco "antes de falar de preco") */
+  .roi-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+  .roi-card { border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px; background: rgba(0,0,0,0.35); }
+  .roi-card.best { border-color: rgba(168,232,62,0.4); background: rgba(168,232,62,0.05); box-shadow: 0 0 50px rgba(168,232,62,0.08); }
+  .rc-plan { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--m); font-weight: 700; }
+  .roi-card.best .rc-plan { color: var(--g); }
+  .rc-value { font-family: var(--mono); font-size: clamp(30px, 4vw, 40px); font-weight: 800; color: var(--w); letter-spacing: -.03em; margin: 12px 0 4px; line-height: 1; }
+  .roi-card.best .rc-value { color: var(--g); }
+  .rc-label { display: block; font-size: 12.5px; color: var(--m); }
+  .rc-foot { display: flex; flex-direction: column; gap: 5px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 11px; color: var(--f); letter-spacing: .02em; }
+
+  .split-insight {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+  .si-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all .3s cubic-bezier(.22, 1, .36, 1);
+  }
+  .si-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(15, 15, 20, 0.6);
+    transform: translateY(-2px);
+  }
+  .si-n {
+    display: block;
+    font-family: var(--mono);
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: 800;
+    color: var(--g);
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+  .si-n small { font-size: 14px; font-weight: 500; color: var(--m); }
+  .si-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--w);
+    font-weight: 700;
+    margin-top: 6px;
+  }
+  .si-l {
+    display: block;
+    font-size: 12.5px;
+    color: var(--m);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  .roi-net { text-align: right; }
+
+  /* Divisao entre o que custeia e o que sobra */
+  .netbox { margin-top: 12px; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(168,232,62,0.22); background: rgba(168,232,62,0.06); display: flex; flex-direction: column; gap: 3px; }
+  .netbox.best { border-color: rgba(168,232,62,0.45); background: rgba(168,232,62,0.11); }
+  .nb-lab { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--m); font-weight: 700; }
+  .nb-val { font-family: var(--mono); font-size: 25px; font-weight: 800; color: var(--g); letter-spacing: -.03em; line-height: 1.1; }
+  .nb-sub { font-family: var(--mono); font-size: 10px; color: var(--f); line-height: 1.4; }
+
+  @media (max-width: 860px) {
+    .sim-box { padding: 20px 16px; overflow-x: auto; }
+  }
+
+  /* Visual Calculation & Ad Strategy Widgets (Substituindo Notas em Texto) */
+  .calc-details-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  
+  .calc-details-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .calc-details-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--f);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .calc-details-title i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--g);
+    box-shadow: 0 0 8px var(--g-glow);
+    flex: none;
+  }
+
+  .calc-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+  }
+  
+  .calc-card {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all .3s cubic-bezier(.22, 1, .36, 1);
+  }
+  .calc-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+    background: rgba(15, 15, 20, 0.6);
+  }
+  .calc-card.highlight {
+    border-color: rgba(168, 232, 62, 0.35);
+    background: linear-gradient(135deg, rgba(168, 232, 62, 0.06), rgba(0, 0, 0, 0.5));
+    box-shadow: 0 0 25px rgba(168, 232, 62, 0.06);
+  }
+
+  .calc-card .cc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .calc-card .cc-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--f);
+    font-weight: 700;
+  }
+  .calc-card.highlight .cc-tag {
+    color: var(--g);
+  }
+  .calc-card .cc-badge {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--m);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .calc-card.highlight .cc-badge {
+    background: rgba(168, 232, 62, 0.14);
+    color: var(--g);
+    border: 1px solid rgba(168, 232, 62, 0.3);
+  }
+
+  .calc-card .cc-val {
+    font-family: var(--mono);
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 800;
+    color: var(--w);
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    margin: 4px 0 6px;
+  }
+  .calc-card.highlight .cc-val {
+    color: var(--g);
+  }
+  .calc-card .cc-sub {
+    font-size: 12.5px;
+    color: var(--m);
+    line-height: 1.45;
+  }
+
+  /* Ad Strategy Comparison Box */
+  .ad-strategy-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  
+  .ad-panel {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all .3s ease;
+  }
+  .ad-panel.pro {
+    border-color: rgba(168, 232, 62, 0.32);
+    background: linear-gradient(180deg, rgba(168, 232, 62, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%);
+    box-shadow: 0 0 30px rgba(168, 232, 62, 0.05);
+  }
+  
+  .ad-panel .ap-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .ad-panel .ap-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--w);
+    font-weight: 700;
+  }
+  .ad-panel .ap-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--m);
+    font-weight: 700;
+  }
+  .ad-panel.pro .ap-pill {
+    background: var(--g);
+    color: var(--g-dark);
+    font-weight: 800;
+  }
+
+  .ad-panel .ap-budget {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .ad-panel .ap-budget .num {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--w);
+    letter-spacing: -.02em;
+  }
+  .ad-panel.pro .ap-budget .num {
+    color: var(--g);
+  }
+  .ad-panel .ap-budget .period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--f);
+  }
+
+  .ad-panel .ap-desc {
+    font-size: 13px;
+    color: var(--m);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .ad-panel .ap-desc strong {
+    color: var(--t);
+    font-weight: 600;
+  }
+
+  /* Payback Minimalista e Trabalhado (Fora dos Cards de Preço) */
+  .payback-box {
+    margin-top: 36px;
+    padding: 28px 30px;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: rgba(10, 10, 14, 0.75);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .pb-head h4 {
+    font-size: 18px;
+    margin: 10px 0 0;
+    color: var(--w);
+    letter-spacing: -.02em;
+  }
+
+  .pb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  
+  .pb-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all .3s ease;
+  }
+  
+  .pb-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(15, 15, 20, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .pb-card.best {
+    border-color: rgba(168, 232, 62, 0.35);
+    background: linear-gradient(135deg, rgba(168, 232, 62, 0.05), rgba(0, 0, 0, 0.5));
+    box-shadow: 0 0 30px rgba(168, 232, 62, 0.05);
+  }
+  
+  .pb-tier {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--m);
+    font-weight: 700;
+  }
+  .pb-card.best .pb-tier {
+    color: var(--g);
+  }
+  
+  .pb-val {
+    display: block;
+    font-family: var(--mono);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--w);
+    letter-spacing: -.03em;
+    line-height: 1.05;
+  }
+  .pb-card.best .pb-val {
+    color: var(--g);
+  }
+  
+  .pb-lbl {
+    display: block;
+    font-size: 12px;
+    color: var(--m);
+    margin-top: 2px;
+  }
+  
+  .pb-bar-wrap {
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  
+  .pb-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .pb-bar.best {
+    background: var(--g);
+    box-shadow: 0 0 10px var(--g-glow);
+  }
+
+  .pb-sub {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--f);
+  }
+  .pb-sub strong {
+    color: var(--t);
+  }
+
+  .pb-finance {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  .pb-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--m);
+  }
+  .pb-row strong {
+    font-family: var(--mono);
+    color: var(--w);
+    font-size: 13.5px;
+  }
+  .pb-row.deduction {
+    color: var(--f);
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pb-row.deduction .ded-val {
+    font-family: var(--mono);
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .pb-row.net {
+    padding-top: 4px;
+  }
+  .pb-row.net .pb-val {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--w);
+    line-height: 1;
+  }
+  .pb-card.best .pb-row.net .pb-val {
+    color: var(--g);
+  }
+
+  /* Marca d'água PLANOS idêntica à imagem d19054f9923df23dbcde3d7dda87bfd4.jpg */
+  .prices-wrap {
+    position: relative;
+    margin-top: 175px;
+  }
+
+  .prices-watermark {
+    position: absolute;
+    top: -155px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--sans);
+    font-size: clamp(100px, 22.5vw, 260px);
+    font-weight: 900;
+    letter-spacing: -.05em;
+    color: rgba(255, 255, 255, 0.95);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
+    line-height: 1;
+    text-transform: uppercase;
+    text-shadow: 0 0 50px rgba(255, 255, 255, 0.18);
+  }
+
+  .btn { display: block; text-align: center; margin-top: 26px; border-radius: 999px; padding: 17px 22px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--line-bright); color: var(--t); background: rgba(255,255,255,0.04); transition: all .3s ease; font-weight: 700; }
+  .btn:hover { background: rgba(255,255,255,0.12); border-color: var(--w); color: var(--w); transform: translateY(-2px); }
+  .btn.solid { background: var(--g); color: var(--g-dark); border-color: var(--g); font-weight: 800; box-shadow: 0 0 30px rgba(168,232,62,0.25); }
+  .btn.solid:hover { background: #92d42d; border-color: #92d42d; transform: translateY(-2px); box-shadow: 0 8px 35px rgba(168,232,62,0.4); }
+
+  /* Quem Executa / MARQUEE COM BACKDROP-BLUR INTENSO */
+  .mq {
+    margin-top: 44px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    padding: 16px 0;
+    background: rgba(4, 4, 6, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .mqin { display: flex; gap: 14px; width: max-content; animation: slide 50s linear infinite; }
+  .mq:hover .mqin { animation-play-state: paused; }
+  .mqin span { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; color: var(--t); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 9px 18px; white-space: nowrap; background: rgba(255,255,255,0.05); font-weight: 600; }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .bento { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 44px; }
+  .disc { padding: 32px 28px; }
+  .disc .n { font-family: var(--mono); font-size: 10.5px; letter-spacing: .18em; color: var(--g); display: block; margin-bottom: 18px; text-transform: uppercase; font-weight: 700; }
+  .disc h3 { margin-bottom: 12px; font-size: 18px; line-height: 1.35; }
+  .disc p { font-size: 14.5px; line-height: 1.6; color: var(--m); }
+
+  .note { font-family: var(--mono); font-size: 12.5px; color: var(--m); margin-top: 28px; line-height: 1.8; max-width: 72ch; }
+
+  footer { padding: 52px 0 76px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--f); text-align: center; }
+  footer p { color: var(--f); margin: 0 0 6px; }
+
+  /* ==========================================================================
+     UI/UX PRO MAX - REGRAS DE PERFORMANCE E DESIGN SYSTEM PARA MOBILE
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .wrap {
+      padding: 0 16px !important;
+    }
+
+    /* Headings e títulos no mobile */
+    .head h2 {
+      font-size: clamp(24px, 6vw, 32px) !important;
+      line-height: 1.25 !important;
+      letter-spacing: -.02em !important;
+    }
+    .head p.sub {
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+    }
+
+    /* Hero no mobile */
+    .hero {
+      padding-top: 36px !important;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 7vw, 40px) !important;
+      line-height: 1.18 !important;
+      letter-spacing: -.03em !important;
+    }
+    .hero p.sub {
+      font-size: 14.5px !important;
+    }
+    .fiche {
+      padding: 20px 18px !important;
+    }
+    .fgrid {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 14px 12px !important;
+    }
+
+    /* Ancoragem de Custo no mobile */
+    .ar {
+      grid-template-columns: 1fr !important;
+      gap: 6px !important;
+      padding: 16px 20px !important;
+    }
+
+    /* Marca d'água PLANOS no Mobile */
+    .prices-wrap {
+      margin-top: 110px !important;
+      position: relative !important;
+    }
+
+    .prices-watermark {
+      display: block !important;
+      position: absolute !important;
+      top: -95px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      font-family: var(--sans) !important;
+      font-size: clamp(60px, 18vw, 130px) !important;
+      font-weight: 900 !important;
+      letter-spacing: -.05em !important;
+      color: rgba(255, 255, 255, 0.95) !important;
+      pointer-events: none !important;
+      user-select: none !important;
+      white-space: nowrap !important;
+      z-index: 0 !important;
+      line-height: 1 !important;
+      text-transform: uppercase !important;
+      text-shadow: 0 0 45px rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* CARDS DE PLANOS EMPILHADOS VERTICALMENTE (ELEGANTES E ORGANIZADOS) */
+    .prices {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 24px !important;
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      overflow: visible !important;
+    }
+
+    .price {
+      flex: 1 1 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: auto !important;
+      box-sizing: border-box !important;
+      padding: 30px 22px 26px !important;
+      border-radius: 26px !important;
+      background: rgba(16, 16, 22, 0.94) !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .mobile-swipe-hint {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: -10px;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--g);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .price::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 2px !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05)) !important;
+    }
+
+    .price.best {
+      border-color: rgba(168, 232, 62, 0.55) !important;
+      background: linear-gradient(180deg, rgba(168, 232, 62, 0.1) 0%, rgba(12, 18, 10, 0.95) 100%) !important;
+      box-shadow: 0 0 45px rgba(168, 232, 62, 0.18), inset 0 0 20px rgba(168, 232, 62, 0.05) !important;
+    }
+
+    .price.best::before {
+      height: 3px !important;
+      background: linear-gradient(90deg, transparent, var(--g), transparent) !important;
+    }
+
+    /* Glow constante no mobile para profundidade estética */
+    .price .glow {
+      position: absolute !important;
+      width: 200px !important;
+      height: 200px !important;
+      background: radial-gradient(circle, rgba(168, 232, 62, 0.14) 0%, transparent 70%) !important;
+      top: -40px !important;
+      right: -40px !important;
+      pointer-events: none !important;
+      border-radius: 50% !important;
+      left: auto !important;
+    }
+
+    .ptop {
+      align-items: center !important;
+    }
+    .price .tier {
+      font-size: 13px !important;
+      letter-spacing: .18em !important;
+    }
+    .price .tag {
+      font-size: 9.5px !important;
+      padding: 4px 10px !important;
+    }
+
+    .price .role {
+      font-size: 13.5px !important;
+      min-height: auto !important;
+      margin: 12px 0 0 !important;
+      line-height: 1.55 !important;
+    }
+
+    .amt {
+      margin: 18px 0 0 !important;
+      align-items: baseline !important;
+    }
+    .amt .n {
+      font-size: 42px !important;
+      line-height: 1 !important;
+      letter-spacing: -.03em !important;
+    }
+    .amt .cur {
+      font-size: 18px !important;
+      padding-bottom: 2px !important;
+    }
+    .amt .per {
+      font-size: 12.5px !important;
+      padding-bottom: 3px !important;
+    }
+
+    .impl {
+      margin-top: 14px !important;
+      padding: 12px 0 !important;
+      font-size: 12px !important;
+    }
+    .tot90 {
+      margin-top: 10px !important;
+      padding: 10px 14px !important;
+      font-size: 12.5px !important;
+      border-radius: 10px !important;
+    }
+
+    .price ul {
+      margin-top: 20px !important;
+      gap: 13px !important;
+    }
+    .price li {
+      grid-template-columns: 20px 1fr !important;
+      gap: 10px !important;
+      font-size: 13px !important;
+      line-height: 1.5 !important;
+    }
+    .price li svg {
+      width: 18px !important;
+      height: 18px !important;
+      margin-top: 1px !important;
+    }
+
+    .btn {
+      padding: 16px 20px !important;
+      font-size: 11px !important;
+      border-radius: 999px !important;
+      margin-top: 22px !important;
+    }
+    .btn:active {
+      transform: scale(0.98) !important;
+    }
+
+    /* Garantia Contratual no Mobile */
+    .guar-glass-box {
+      padding: 24px 18px !important;
+      border-radius: 20px !important;
+    }
+    .guar-cards-grid {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+    .guar-card {
+      padding: 20px 16px !important;
+    }
+    .guar-shield-callout {
+      padding: 18px 16px !important;
+      flex-direction: column !important;
+      text-align: center !important;
+      align-items: center !important;
+    }
+
+    /* Payback Box & ROI Cards no Mobile */
+    .pb-grid {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+    .roi-cards {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+    .split-insight {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+
+    /* Dash KPIs & Charts no Mobile */
+    .dash-kpis {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 10px !important;
+    }
+    .dash-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+
+    /* Bônus Grid no Mobile */
+    .bonus-grid {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+
+    /* Bento & Frentes de Atuação no Mobile */
+    .front-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    .bento {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .split-insight {
+      grid-template-columns: 1fr !important;
+    }
+    .dash-kpis {
+      grid-template-columns: 1fr !important;
+    }
+    .fgrid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+
+/* ===== Ajustes da proposta Cláudia ===== */
+.hero, .head { text-align: center; }
+.hero .sub, .head .sub { margin-left: auto; margin-right: auto; }
+.head h2 { margin-left: auto; margin-right: auto; max-width: 24ch; }
+.hero .fiche { text-align: left; }
+.ck { width: 18px; height: 18px; flex: none; display: inline-block; margin-top: 2px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Ccircle cx='10' cy='10' r='9' fill='rgba(168,232,62,0.14)' stroke='%23a8e83e'/%3E%3Cpath d='M6 10.2l2.6 2.6L14 7.4' stroke='%23a8e83e' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat; }
+.gc-n { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--g); font-weight: 700; margin-bottom: 12px; }
+
+/* Organograma do método */
+.org { padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 40px); }
+.org-row.one { max-width: 380px; margin: 0 auto; }
+.org-row.two { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 3vw, 28px); }
+.org-node { border: 1px solid var(--line-bright); border-radius: 22px; background: rgba(8, 8, 12, 0.85); padding: 22px 22px 24px; text-align: center; transition: border-color .3s ease, transform .3s ease; }
+.org-node:hover { border-color: rgba(168, 232, 62, 0.45); transform: translateY(-3px); }
+.org-node.top, .org-node.close { border-color: rgba(168, 232, 62, 0.5); background: linear-gradient(180deg, rgba(168, 232, 62, 0.08) 0%, rgba(8, 8, 12, 0.9) 100%); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45); }
+.org-node .on-step { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--g); font-weight: 700; margin-bottom: 8px; }
+.org-node h4 { font-size: 17px; color: var(--w); margin: 0 0 8px; letter-spacing: -.01em; }
+.org-node p { font-size: 13.5px; line-height: 1.55; }
+.org-link { display: block; width: 100%; max-width: 760px; height: 52px; margin: 0 auto; overflow: visible; }
+.org-link path { fill: none; stroke: var(--g); stroke-width: 1.6; stroke-dasharray: 5 5; vector-effect: non-scaling-stroke; opacity: .75; animation: orgflow 1.4s linear infinite; }
+.org-link path.faint { opacity: .3; }
+@keyframes orgflow { to { stroke-dashoffset: -20; } }
+@media (prefers-reduced-motion: reduce) { .org-link path { animation: none; } }
+@media (max-width: 640px) { .org-row.two { grid-template-columns: 1fr 1fr; gap: 10px; } .org-node { padding: 16px 12px; border-radius: 18px; } .org-node p { font-size: 12.5px; } }
+
+/* 4 cards de tecnologia em 1 linha no desktop */
+.gain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.gain-card { padding: 22px 18px; border-radius: 20px; display: flex; flex-direction: column; }
+.gain-card h3 { font-size: 16px; margin-bottom: 12px; line-height: 1.3; }
+.chk { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.chk li { display: flex; gap: 8px; align-items: flex-start; font-size: 12.8px; color: var(--m); line-height: 1.4; }
+
+@media (max-width: 1024px) {
+  .gain-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+@media (max-width: 580px) {
+  .gain-grid { grid-template-columns: 1fr; }
+}
+
+/* Gráficos lado a lado */
+.charts-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+.charts-two .panel { border-radius: 26px; }
+
+/* Equipe */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.team-card { padding: 26px 24px; border-radius: 24px; }
+.team-card h4 { font-size: 18px; color: var(--w); margin: 0 0 8px; }
+.team-card p { font-size: 13.8px; line-height: 1.55; }
+.cost-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.cost-table th, .cost-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+.cost-table th { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--f); }
+.cost-table .sum-row td { border-bottom: none; padding-top: 22px; font-size: 16px; }
+.cost-table .strike { text-decoration: line-through; color: #8a8a9a; }
+.cost-table .big { font-size: 18px; font-weight: 800; }
+
+/* Cases em 3x2 perfeito (6 cases) com fotos reais */
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.case-card { padding: 24px 20px; border-radius: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; transition: transform 0.3s ease, border-color 0.3s ease; }
+.case-card:hover { transform: translateY(-4px); border-color: rgba(168, 232, 62, 0.45); }
+.case-body h3 { margin-bottom: 8px; font-size: 18.5px; }
+.case-body p { font-size: 13.2px; line-height: 1.5; color: var(--m); }
+.case-img-wrap { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-bright); background: #09090d; width: 100%; aspect-ratio: 1 / 1.12; display: flex; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }
+.case-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
+.case-card:hover .case-img { transform: scale(1.02); }
+
+@media (max-width: 960px) {
+  .cases-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .cases-grid { grid-template-columns: 1fr; }
+}
+
+/* Plano único */
+.prices.single { display: block; max-width: 620px; margin: 0 auto; }
+.prices.single .price ul { margin-bottom: 6px; }
+.prices.single .price li { display: flex; gap: 11px; }
+.plan-group { display: block; margin: 26px 0 12px; padding-top: 18px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--g); font-weight: 700; }
+
+/* Conta de retorno (Desktop) */
+.calc-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 6px 0 22px; }
+.calc-mini { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--line); border-radius: 20px; padding: 20px; text-align: left; }
+.calc-mini .cm-l { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--f); margin-bottom: 8px; }
+.calc-mini .cm-v { display: block; font-family: var(--mono); font-size: 20px; font-weight: 800; color: var(--w); margin-bottom: 6px; }
+.calc-mini .cm-s { font-size: 12.8px; color: var(--m); line-height: 1.5; }
+.pb-grid.two { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.pb-finance { display: flex; flex-direction: column; gap: 10px; margin: 12px 0 16px; }
+.pb-row { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+.pb-row .pb-row-label { font-size: 12.5px; color: var(--m); }
+.pb-row strong, .pb-row .ded-val { font-family: var(--mono); font-size: 14px; color: var(--w); white-space: nowrap; }
+.pb-row.deduction { padding-bottom: 8px; border-bottom: 1px dashed var(--line); margin-bottom: 4px; }
+.pb-row.deduction .ded-val { color: rgba(255, 255, 255, 0.55); font-weight: 500; }
+.pb-row.net { padding-top: 4px; }
+.pb-row.net .pb-row-label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--f); }
+.pb-row.net .pb-val { font-family: var(--mono); font-size: 22px; font-weight: 800; color: var(--w); white-space: nowrap; line-height: 1; }
+.pb-card.best .pb-row.net .pb-val { color: var(--g); }
+.pb-foot { margin-top: 22px; font-size: 13.5px; line-height: 1.6; color: var(--m); text-align: center; max-width: 70ch; margin-left: auto; margin-right: auto; }
+
+/* Bônus */
+.bonus-banner { margin: 8px 0 28px; padding: 16px 24px; border-radius: 18px; border: 1px solid rgba(168,232,62,0.3); background: rgba(168,232,62,0.06); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; font-weight: 700; }
+.bonus-banner .bb-l { display: inline-flex; align-items: center; gap: 10px; color: var(--w); letter-spacing: .03em; text-transform: uppercase; }
+.bonus-banner .bb-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--g); }
+.bonus-banner .bb-r { color: var(--g); }
+.bonus-card { border-radius: 24px; }
+
+/* ===== REFINAMENTO MOBILE IMPECCABLE (< 640px) ===== */
+@media (max-width: 640px) {
+  html, body { overflow-x: hidden !important; width: 100% !important; }
+  .wrap { padding-left: 16px !important; padding-right: 16px !important; }
+  .hero h1 { font-size: clamp(26px, 8vw, 36px) !important; line-height: 1.15 !important; }
+  .head h2 { font-size: clamp(22px, 7vw, 28px) !important; line-height: 1.25 !important; }
+
+  /* Método Organograma */
+  .org { padding: 22px 14px !important; border-radius: 20px !important; }
+  .org-row.one, .org-row.two { max-width: 100% !important; }
+  .org-row.two { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .org-node { padding: 16px 14px !important; border-radius: 16px !important; }
+  .org-node h4 { font-size: 15.5px !important; }
+  .org-node p { font-size: 12.8px !important; }
+  .org-link { height: 28px !important; }
+
+  /* 4 Cards de Tecnologia */
+  .gain-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .gain-card { padding: 18px 16px !important; border-radius: 18px !important; }
+  .gain-card h3 { font-size: 15.5px !important; }
+  .chk li { font-size: 12.5px !important; }
+
+  /* Dashboard de Métricas */
+  .ladder-strip { gap: 6px !important; }
+  .ladder-step { padding: 8px 6px !important; border-radius: 12px !important; }
+  .ladder-step .lstep-days { font-size: 11.5px !important; }
+  .ladder-step .lstep-sub { font-size: 9.5px !important; }
+  .dash-kpis { grid-template-columns: 1fr !important; gap: 8px !important; }
+
+  /* Gráficos em coluna única sem estouro horizontal */
+  .charts-two { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .charts-two .panel { padding: 20px 14px !important; border-radius: 20px !important; }
+
+  /* Tabela de Equipe */
+  .cost-table th, .cost-table td { padding: 10px 8px !important; font-size: 12px !important; }
+  .cost-table .big { font-size: 14.5px !important; }
+
+  /* Cases em coluna única */
+  .cases-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .case-card { padding: 20px 16px !important; border-radius: 20px !important; }
+  .case-img-wrap { aspect-ratio: 1 / 1.12 !important; height: auto !important; border-radius: 14px !important; }
+
+  /* Preços / Plano Único */
+  .prices.single .price { padding: 26px 18px !important; border-radius: 22px !important; }
+  .prices.single .price .amt .n { font-size: 42px !important; }
+  .prices.single .price li { font-size: 13px !important; line-height: 1.4 !important; }
+
+  /* Mini Cálculos */
+  .calc-row { grid-template-columns: 1fr !important; gap: 10px !important; margin: 4px 0 16px !important; }
+  .calc-mini { padding: 16px 14px !important; border-radius: 16px !important; }
+  .calc-mini .cm-v { font-size: 17.5px !important; }
+
+  /* Retorno / Payback Cards (CORREÇÃO CIRÚRGICA DO MOBILE) */
+  .pb-grid.two { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .pb-card { padding: 22px 18px !important; border-radius: 20px !important; }
+  .pb-tier { font-size: 11px !important; line-height: 1.4 !important; margin-bottom: 14px !important; }
+  .pb-finance { display: flex !important; flex-direction: column !important; gap: 12px !important; margin: 12px 0 14px !important; }
+  .pb-row { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; padding: 0 !important; }
+  .pb-row .pb-row-label { font-size: 11.5px !important; color: var(--m) !important; letter-spacing: .02em !important; }
+  .pb-row strong { font-family: var(--mono) !important; font-size: 16px !important; font-weight: 700 !important; color: var(--w) !important; white-space: normal !important; text-align: left !important; }
+  .pb-row.deduction { padding-bottom: 10px !important; border-bottom: 1px dashed var(--line) !important; margin-bottom: 2px !important; }
+  .pb-row.deduction .ded-val { font-family: var(--mono) !important; font-size: 14.5px !important; color: rgba(255, 255, 255, 0.6) !important; text-align: left !important; }
+  .pb-row.net { padding-top: 6px !important; gap: 5px !important; }
+  .pb-row.net .pb-row-label { font-family: var(--mono) !important; font-size: 10.5px !important; text-transform: uppercase !important; letter-spacing: .12em !important; color: var(--f) !important; }
+  .pb-row.net .pb-val { font-family: var(--mono) !important; font-size: clamp(20px, 6vw, 24px) !important; font-weight: 800 !important; color: var(--w) !important; line-height: 1.2 !important; white-space: normal !important; text-align: left !important; }
+  .pb-card.best .pb-row.net .pb-val { color: var(--g) !important; }
+  .pb-sub { font-size: 12px !important; line-height: 1.45 !important; margin-top: 10px !important; }
+
+  /* Bônus */
+  .bonus-banner { padding: 14px 16px !important; border-radius: 14px !important; flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; font-size: 11px !important; }
+  .bonus-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .bonus-card { padding: 20px 16px !important; border-radius: 18px !important; }
+}
+
+::selection { background: var(--g); color: #0b1300; }
+
+</style>
+</head>
+<body>
+<canvas id="webgl-bg"></canvas>
+<div class="page">
+<div class="wrap">
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <span class="pill"><i></i>Proposta Comercial</span>
+  <h1>Proposta de Prestação de Serviços</h1>
+  <p class="sub">Gestão de Performance &amp; Tecnologia</p>
+
+  <div class="card fiche">
+    <div class="glow"></div>
+    <dl class="fgrid">
+      <div><dt>Cliente</dt><dd>Cláudia Santana</dd></div>
+      <div><dt>Responsável</dt><dd>Julio Souza</dd></div>
+      <div><dt>Tipo de proposta</dt><dd>Assessoria mensal</dd></div>
+      <div><dt>Data</dt><dd>08 de Outubro de 2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== MÉTODO (ORGANOGRAMA) ===== -->
+<section class="rv">
+  <span class="section-mark">MÉTODO</span>
+  <div class="head">
+    <span class="pill"><i></i>Como o cliente chega até você</span>
+    <h2>Do anúncio ao fechamento, cada pessoa passa por um caminho desenhado.</h2>
+    <p class="sub">Não quero encher seu WhatsApp com curiosos. Quero que cheguem até você pessoas com poder de compra real para os imóveis de Feira de Santana e região. Por isso, todo interessado passa por etapas que filtram, aquecem e organizam.</p>
+  </div>
+
+  <div class="panel org">
+    <div class="org-row one">
+      <div class="org-node top">
+        <span class="on-step">Ponto de partida</span>
+        <h4>Anúncios no Instagram e Facebook</h4>
+        <p>R$ 1.500 por mês de verba: R$ 1.200 para atrair compradores e R$ 300 para impulsionar os conteúdos do seu perfil.</p>
+      </div>
+    </div>
+
+    <svg class="org-link" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M50 0 V20 H25 V40" /><path d="M50 20 H75 V40" />
+    </svg>
+
+    <div class="org-row two">
+      <div class="org-node">
+        <span class="on-step">Vitrine</span>
+        <h4>Seu perfil no Instagram</h4>
+        <p>O conteúdo impulsionado traz seguidores com perfil de compra. Quem chama no direct também entra na triagem.</p>
+      </div>
+      <div class="org-node">
+        <span class="on-step">Pré-qualificação</span>
+        <h4>Formulário de triagem</h4>
+        <p>Antes de qualquer conversa, a pessoa responde perguntas rápidas: tipo de imóvel, faixa de valor, forma de pagamento e prazo para comprar.</p>
+      </div>
+    </div>
+
+    <svg class="org-link" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+      <path class="faint" d="M25 0 V12 H75" /><path d="M75 0 V20 H25 V40" /><path d="M75 20 V40" />
+    </svg>
+
+    <div class="org-row two">
+      <div class="org-node">
+        <span class="on-step">Caminho direto</span>
+        <h4>WhatsApp da Cláudia</h4>
+        <p>Quem já chega com perfil claro e pronto para conversar vai direto para o seu atendimento, com as respostas da triagem em mãos.</p>
+      </div>
+      <div class="org-node">
+        <span class="on-step">Caminho com automação</span>
+        <h4>Conversa automatizada</h4>
+        <p>Quem ainda tem dúvidas conversa com uma automação que confirma o interesse e o momento de compra antes de passar para você.</p>
+      </div>
+    </div>
+
+    <svg class="org-link" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M25 0 V20 H75 V0" /><path d="M50 20 V40" />
+    </svg>
+
+    <div class="org-row one">
+      <div class="org-node close">
+        <span class="on-step">Fechamento</span>
+        <h4>Atendimento da Cláudia</h4>
+        <p>Você entra onde é insubstituível: na conversa, na visita e na negociação, só com quem já mostrou que pode comprar.</p>
+      </div>
+    </div>
+
+    <svg class="org-link" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M50 0 V40" />
+    </svg>
+
+    <div class="org-row one">
+      <div class="org-node">
+        <span class="on-step">Acompanhamento</span>
+        <h4>Base de clientes nutrida</h4>
+        <p>Quem não comprou agora fica na sua base e continua recebendo mensagens automáticas: novos imóveis, lançamentos e oportunidades. Nenhum contato se perde.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== POR QUE UM DESENVOLVEDOR NO TRÁFEGO (4 CARDS ALINHADOS) ===== -->
+<section class="rv">
+  <span class="section-mark">TECH</span>
+  <div class="head">
+    <span class="pill"><i></i>O que muda por eu ser desenvolvedor</span>
+    <h2>Por que ter um desenvolvedor à frente do seu tráfego.</h2>
+    <p class="sub">Um gestor comum sobe anúncio e acompanha o painel. Eu construo a infraestrutura por trás da campanha. Isso é o que você recebe a mais:</p>
+  </div>
+
+  <div class="gain-grid">
+    <div class="card gain-card">
+      <div class="glow"></div>
+      <span class="gc-n">01 · Inteligência</span>
+      <h3>Integração via API com a Meta</h3>
+      <ul class="chk">
+        <li><span class="ck"></span><span>API de Conversões configurada</span></li>
+        <li><span class="ck"></span><span>Retorno automático de leads qualificados</span></li>
+        <li><span class="ck"></span><span>O algoritmo aprende o perfil comprador</span></li>
+        <li><span class="ck"></span><span>Campanhas mais precisas mês a mês</span></li>
+      </ul>
+    </div>
+
+    <div class="card gain-card">
+      <div class="glow"></div>
+      <span class="gc-n">02 · Rastreamento</span>
+      <h3>Origem exata de cada cliente</h3>
+      <ul class="chk">
+        <li><span class="ck"></span><span>Pixel e parâmetros instalados</span></li>
+        <li><span class="ck"></span><span>Saiba qual criativo gerou a conversa</span></li>
+        <li><span class="ck"></span><span>Custo real por lead qualificado</span></li>
+        <li><span class="ck"></span><span>Decisões de verba 100% baseadas em dados</span></li>
+      </ul>
+    </div>
+
+    <div class="card gain-card">
+      <div class="glow"></div>
+      <span class="gc-n">03 · Ferramentas</span>
+      <h3>Sistemas feitos sob medida</h3>
+      <ul class="chk">
+        <li><span class="ck"></span><span>CRM próprio sem mensalidade de software</span></li>
+        <li><span class="ck"></span><span>Formulários e páginas de triagem</span></li>
+        <li><span class="ck"></span><span>Automações de qualificação e nutrição</span></li>
+        <li><span class="ck"></span><span>Painel com seus números em uma tela só</span></li>
+      </ul>
+    </div>
+
+    <div class="card gain-card">
+      <div class="glow"></div>
+      <span class="gc-n">04 · Engenharia</span>
+      <h3>Front-end, back-end &amp; banco</h3>
+      <ul class="chk">
+        <li><span class="ck"></span><span>Landing pages ultrarrápidas de lançamentos</span></li>
+        <li><span class="ck"></span><span>Aplicações web conforme a demanda</span></li>
+        <li><span class="ck"></span><span>Banco de dados estruturado da sua base</span></li>
+        <li><span class="ck"></span><span>Integração total entre canais digitais</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== DASHBOARD DE VERBA ===== -->
+<section class="rv">
+  <span class="section-mark">NÚMEROS</span>
+  <div class="head">
+    <span class="pill"><i></i>R$ 1.500 de verba por mês</span>
+    <h2>O que esse investimento consegue trazer, mês a mês.</h2>
+    <p class="sub">Números calculados com base nos custos reais de anúncio do mercado imobiliário em Feira de Santana e região. Selecione o mês para ver a evolução.</p>
+  </div>
+
+  <div class="panel" style="padding:clamp(20px, 3vw, 36px);">
+    <div style="margin-bottom:24px;">
+      <div class="ladder-strip" id="periodSelector">
+        <button class="ladder-step active" data-days="30">
+          <span class="lstep-days">Mês 1</span>
+          <span class="lstep-track"><span class="lstep-fill" style="width:33%">Aprendizado</span></span>
+          <span class="lstep-sub">20 leads no mês</span>
+        </button>
+        <button class="ladder-step" data-days="60">
+          <span class="lstep-days">Mês 2</span>
+          <span class="lstep-track"><span class="lstep-fill" style="width:66%">Otimização</span></span>
+          <span class="lstep-sub">25 leads no mês</span>
+        </button>
+        <button class="ladder-step" data-days="90">
+          <span class="lstep-days">Mês 3</span>
+          <span class="lstep-track"><span class="lstep-fill max" style="width:100%">Maturidade</span></span>
+          <span class="lstep-sub">30 leads no mês</span>
+        </button>
+      </div>
+      <p class="note" id="phaseNote" style="margin:14px 0 0;">Mês 1: a Meta ainda está aprendendo quem é o seu comprador. O custo por lead é mais alto e cai conforme os dados de qualificação voltam para a plataforma.</p>
+    </div>
+
+    <div class="dash-kpis" style="margin-top:0;">
+      <div class="dash-kpi-card">
+        <span class="lbl">Verba de anúncio</span>
+        <div class="val">R$ 1.500<span style="font-size:13px; font-weight:400; color:var(--m);">/mês</span></div>
+        <span class="subt">R$ 1.200 captação + R$ 300 perfil</span>
+      </div>
+      <div class="dash-kpi-card">
+        <span class="lbl">Pessoas alcançadas</span>
+        <div class="val" id="kpiAlcance">29.000</div>
+        <span class="subt">Público de alta renda na região</span>
+      </div>
+      <div class="dash-kpi-card">
+        <span class="lbl">Leads no X1</span>
+        <div class="val"><span id="kpiLeads">20</span><span style="font-size:13px; font-weight:400; color:var(--m);">/mês</span></div>
+        <span class="subt" id="kpiCpa">Custo por lead: R$ 60</span>
+      </div>
+      <div class="dash-kpi-card">
+        <span class="lbl">Leads qualificados</span>
+        <div class="val grn" id="kpiQual">6</div>
+        <span class="subt" id="kpiQualRate">30% passam na triagem</span>
+      </div>
+      <div class="dash-kpi-card">
+        <span class="lbl">Novos seguidores</span>
+        <div class="val grn" id="kpiSeg">+150</div>
+        <span class="subt">Impulsionamento + conteúdo</span>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="proj-box">
+        <h4><i></i>Para onde vai cada real da verba</h4>
+        <div class="roi-rows">
+          <div class="roi-row">
+            <span class="roi-lab">Captação de clientes (X1)</span>
+            <div class="roi-track"><div class="roi-fill ret" data-w="80%"></div></div>
+            <span class="roi-val grn">R$ 1.200</span>
+          </div>
+          <div class="roi-row">
+            <span class="roi-lab">Impulsionamento do perfil</span>
+            <div class="roi-track"><div class="roi-fill inv" data-w="20%"></div></div>
+            <span class="roi-val">R$ 300</span>
+          </div>
+        </div>
+        <div class="roi-foot">
+          <div>
+            <span class="roi-mult" id="roiMult">R$ 200</span>
+            <span class="roi-mlab">Custo por lead qualificado no mês</span>
+          </div>
+          <div class="roi-net">
+            <span class="roi-nval" id="roiNet">6</span>
+            <span class="roi-mlab">Clientes com perfil de compra</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-box">
+        <h4><i></i>Leads qualificados acumulados em 90 dias</h4>
+        <div class="acc-cols">
+          <div class="acc-col active" data-phase="30">
+            <div class="acc-bar" data-h="22%"></div>
+            <span class="acc-v">6</span>
+            <span class="acc-l">Mês 1</span>
+          </div>
+          <div class="acc-col" data-phase="60">
+            <div class="acc-bar" data-h="56%"></div>
+            <span class="acc-v">15</span>
+            <span class="acc-l">Mês 2</span>
+          </div>
+          <div class="acc-col" data-phase="90">
+            <div class="acc-bar" data-h="100%"></div>
+            <span class="acc-v">27</span>
+            <span class="acc-l">Mês 3</span>
+          </div>
+        </div>
+        <div class="acc-total">
+          <div class="acc-tline"><span>Leads captados no X1</span><strong>75</strong></div>
+          <div class="acc-tline"><span>Filtrados na triagem</span><strong>48</strong></div>
+          <div class="acc-tline sum"><span>Qualificados entregues para você</span><strong class="grn">27</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== GRÁFICOS ===== -->
+<section class="rv">
+  <span class="section-mark">CRESCIMENTO</span>
+  <div class="head">
+    <span class="pill"><i></i>Projeção de 90 dias</span>
+    <h2>Seu perfil cresce e seu WhatsApp recebe quem pode comprar.</h2>
+    <p class="sub">Dois resultados andando juntos: a vitrine ganhando público qualificado e o X1 entregando contatos filtrados. Projeção conservadora, sem promessa milagrosa.</p>
+  </div>
+
+  <div class="charts-two">
+    <div class="panel">
+      <div style="margin-bottom:24px;">
+        <span class="pill" style="font-size:10px; padding:6px 14px;"><i></i>Instagram · R$ 300/mês</span>
+        <h3 style="font-size:20px; margin-top:10px;">Novos seguidores acumulados</h3>
+      </div>
+      <div class="mixchart">
+        <div class="mixlegend">
+          <span><i class="emp"></i>Vindos do impulsionamento</span>
+          <span><i class="pf"></i>Vindos do conteúdo orgânico</span>
+        </div>
+        <div class="mixgrid">
+          <div class="mixlines"><span></span><span></span><span></span><span></span></div>
+          <div class="mixcol">
+            <div class="mixval">+150</div>
+            <div class="mixbar"><div class="mixstack" style="height:22%"><div class="seg seg-emp" style="height:47%"></div><div class="seg seg-pf" style="height:53%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 1</span><span class="msub">70 pagos + 80 orgânicos</span></div>
+          </div>
+          <div class="mixcol">
+            <div class="mixval">+370</div>
+            <div class="mixbar"><div class="mixstack" style="height:55%"><div class="seg seg-emp" style="height:38%"></div><div class="seg seg-pf" style="height:62%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 2</span><span class="msub">140 pagos + 230 orgânicos</span></div>
+          </div>
+          <div class="mixcol">
+            <div class="mixval">+670</div>
+            <div class="mixbar"><div class="mixstack tall" style="height:100%"><div class="seg seg-emp" style="height:31%"></div><div class="seg seg-pf" style="height:69%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 3</span><span class="msub">210 pagos + 460 orgânicos</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="guar-callout" style="margin-top:24px;">
+        <p>Com <strong>R$ 300/mês</strong> em Reels, alcançamos cerca de <strong>15 mil pessoas da região por mês</strong>. O perfil ganha autoridade e atrai compradores que já acompanham seu trabalho antes do contato.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="margin-bottom:24px;">
+        <span class="pill" style="font-size:10px; padding:6px 14px;"><i></i>X1 · R$ 1.200/mês</span>
+        <h3 style="font-size:20px; margin-top:10px;">Leads no WhatsApp por mês</h3>
+      </div>
+      <div class="mixchart">
+        <div class="mixlegend">
+          <span><i class="emp"></i>Qualificados (vão para você)</span>
+          <span><i class="pf"></i>Filtrados na triagem</span>
+        </div>
+        <div class="mixgrid">
+          <div class="mixlines"><span></span><span></span><span></span><span></span></div>
+          <div class="mixcol">
+            <div class="mixval">20</div>
+            <div class="mixbar"><div class="mixstack" style="height:67%"><div class="seg seg-emp" style="height:30%"></div><div class="seg seg-pf" style="height:70%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 1</span><span class="msub">6 qualificados</span></div>
+          </div>
+          <div class="mixcol">
+            <div class="mixval">25</div>
+            <div class="mixbar"><div class="mixstack" style="height:83%"><div class="seg seg-emp" style="height:36%"></div><div class="seg seg-pf" style="height:64%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 2</span><span class="msub">9 qualificados</span></div>
+          </div>
+          <div class="mixcol">
+            <div class="mixval">30</div>
+            <div class="mixbar"><div class="mixstack tall" style="height:100%"><div class="seg seg-emp" style="height:40%"></div><div class="seg seg-pf" style="height:60%"></div></div></div>
+            <div class="mixfoot"><span class="mlab">Mês 3</span><span class="msub">12 qualificados</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="guar-callout" style="margin-top:24px;">
+        <p>Custo por lead qualificado cai mês a mês conforme o algoritmo aprende quem realmente tem renda e interesse real nos imóveis de Feira de Santana e arredores.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:24px;">
+    <div class="gapnote">
+      <div><div class="v"><span data-count="670" data-green="1">0</span></div><span class="k">Novos seguidores<br>em 90 dias</span></div>
+      <div><div class="v"><span data-count="75">0</span></div><span class="k">Leads captados<br>no X1</span></div>
+      <div><div class="v"><span data-count="27" data-green="1">0</span></div><span class="k">Qualificados<br>entregues a você</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== EQUIPE EM UMA PESSOA ===== -->
+<section class="rv">
+  <span class="section-mark">EQUIPE</span>
+  <div class="head">
+    <span class="pill"><i></i>O que você ganha no time</span>
+    <h2>Quatro funções essenciais integradas na mesma assessoria.</h2>
+    <p class="sub">Performance, tecnologia, edição de vídeo e social media estratégico. Se fosse contratar profissionais separados no mercado, este seria o custo:</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="card team-card"><div class="glow"></div><span class="gc-n">Performance</span><h4>Gestor de tráfego</h4><p>Mais de R$ 150 mil já gerenciados em anúncios. Campanhas, públicos, verba e otimização semanal.</p></div>
+    <div class="card team-card"><div class="glow"></div><span class="gc-n">Tecnologia</span><h4>Desenvolvedor</h4><p>Integrações via API, rastreamento, CRM, automações, páginas e ferramentas próprias sob medida.</p></div>
+    <div class="card team-card"><div class="glow"></div><span class="gc-n">Edição criativa</span><h4>Editor de vídeo</h4><p>Seus vídeos de imóveis transformados em vários anúncios diferentes, sem você precisar regravar.</p></div>
+    <div class="card team-card"><div class="glow"></div><span class="gc-n">Social media</span><h4>Estrategista de conteúdo</h4><p>Linha editorial do perfil, roteiros estratégicos e definição do que impulsionar para atrair compradores.</p></div>
+  </div>
+
+  <div class="card" style="padding:clamp(20px, 3vw, 36px); margin-top:24px; overflow-x:auto;">
+    <div class="glow"></div>
+    <table class="cost-table">
+      <thead><tr><th>Função</th><th>Custo médio de mercado</th><th>Na minha assessoria</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gestor de tráfego</strong></td><td class="mono">R$ 2.500 / mês</td><td class="mono gr">Incluso</td></tr>
+        <tr><td><strong>Desenvolvedor full-stack</strong></td><td class="mono">R$ 4.000 / mês</td><td class="mono gr">Incluso</td></tr>
+        <tr><td><strong>Editor de vídeo</strong></td><td class="mono">R$ 1.800 / mês</td><td class="mono gr">Incluso</td></tr>
+        <tr><td><strong>Social media estratégico</strong></td><td class="mono">R$ 1.800 / mês</td><td class="mono gr">Incluso</td></tr>
+        <tr class="sum-row"><td><strong>Total</strong></td><td class="mono strike">R$ 10.100 / mês</td><td class="mono gr big">R$ 1.700 / mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== CASES (6 CASES COM PROVAS REAIS) ===== -->
+<section class="rv">
+  <span class="section-mark">CASES</span>
+  <div class="head">
+    <span class="pill"><i></i>Com quem já trabalhei</span>
+    <h2>Marcas e empresas que passaram pelas minhas mãos.</h2>
+    <p class="sub">De complexo imobiliário de luxo na Bahia a marcas internacionais e startups de saúde.</p>
+  </div>
+
+  <div class="cases-grid">
+    <!-- Case 1: BudMed -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Healthtech · Sócio-fundador</span>
+        <h3>BudMed</h3>
+        <p>Sou um dos fundadores. Construímos a operação do zero até o lançamento oficial com evento em São Paulo e mais de R$ 1 milhão captado.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/budmed.jpg" alt="Perfil BudMed Oficial" class="case-img" />
+      </div>
+    </div>
+
+    <!-- Case 2: Conrado Imobiliária -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Mercado imobiliário</span>
+        <h3>Conrado Imobiliária</h3>
+        <p>Atuação estratégica na captação digital de compradores e posicionamento da imobiliária no mercado imobiliário da Bahia.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/conrado.jpg" alt="Perfil Conrado Imobiliária" class="case-img" />
+      </div>
+    </div>
+
+    <!-- Case 3: Vitta Náutica -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Náutica e off-road · BRP</span>
+        <h3>Vitta Náutica</h3>
+        <p>Concessionária autorizada Sea-Doo, Can-Am e Focker na Bahia. Captação e anúncios para produtos de alto valor agregado.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/vitta.jpg" alt="Perfil Vitta Náutica" class="case-img" />
+      </div>
+    </div>
+
+    <!-- Case 4: Reserva Rio de Contas -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Imóveis de Alto Padrão</span>
+        <h3>Reserva Rio de Contas</h3>
+        <p>Complexo turístico imobiliário exclusivo em Itacaré (Bahia), focado em investidores e compradores de alto poder aquisitivo.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/reserva-rio-de-contas.jpg" alt="Perfil Reserva Rio de Contas" class="case-img" />
+      </div>
+    </div>
+
+    <!-- Case 5: Skywords -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Publicidade aérea</span>
+        <h3>Skywords</h3>
+        <p>Empresa de mídia e marketing aéreo em Santa Catarina, com estratégias de tráfego voltadas para atração de marcas corporativas.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/skywords.jpg" alt="Perfil Skywords" class="case-img" />
+      </div>
+    </div>
+
+    <!-- Case 6: Royal Enfield Bahia -->
+    <div class="card case-card">
+      <div class="glow"></div>
+      <div class="case-body">
+        <span class="gc-n">Marca internacional</span>
+        <h3>Royal Enfield Bahia</h3>
+        <p>Marca centenária de motocicletas clássicas. Gestão e distribuição de campanhas focadas em público qualificado e lifestyle.</p>
+      </div>
+      <div class="case-img-wrap">
+        <img src="img/cases/royal-enfield.jpg" alt="Perfil Royal Enfield Bahia" class="case-img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== PLANO ===== -->
+<section class="rv" id="plano">
+  <div class="head">
+    <span class="pill"><i></i>Investimento</span>
+    <h2>Uma mensalidade, tudo o que a operação precisa.</h2>
+    <p class="sub">Assessoria mensal de performance e tecnologia. A verba de anúncio (R$ 1.500/mês) é paga direto na sua conta da Meta, separada da mensalidade.</p>
+  </div>
+
+  <div class="prices-wrap">
+    <div class="prices-watermark" aria-hidden="true">PLANO</div>
+    <div class="prices single" style="position:relative; z-index:1;">
+      <div class="card price best">
+        <div class="glow"></div>
+        <div class="ptop"><div class="tier">Performance &amp; Tecnologia</div><span class="tag">Mensal</span></div>
+        <p class="role">Gestão completa da captação, do anúncio ao acompanhamento da sua base, com toda a parte técnica feita por mim.</p>
+        <div class="amt"><span class="cur">R$</span><span class="n">1.700</span><span class="per">/ mês</span></div>
+        <div class="impl"><span>Verba de anúncio recomendada</span><b>R$ 1.500 / mês</b></div>
+        <div class="tot90"><span>Taxa de implementação</span><span>Sem custo</span></div>
+
+        <span class="plan-group">Tráfego e performance</span>
+        <ul>
+          <li><span class="ck"></span><span><strong>Gestão de anúncios no Instagram e Facebook</strong>: campanhas de captação para o X1 e impulsionamento do perfil</span></li>
+          <li><span class="ck"></span><span><strong>Segmentação para alta renda</strong> em Feira de Santana e região</span></li>
+          <li><span class="ck"></span><span><strong>Otimização semanal</strong> de públicos, criativos e distribuição da verba</span></li>
+          <li><span class="ck"></span><span><strong>Volume criativo constante</strong>: novos anúncios testados todas as semanas</span></li>
+        </ul>
+
+        <span class="plan-group">Tecnologia e dados</span>
+        <ul>
+          <li><span class="ck"></span><span><strong>API de Conversões da Meta</strong> com retorno de leads qualificados</span></li>
+          <li><span class="ck"></span><span><strong>Rastreamento completo</strong> da origem de cada contato</span></li>
+          <li><span class="ck"></span><span><strong>CRM próprio</strong> desenvolvido para a sua operação, sem mensalidade de software</span></li>
+          <li><span class="ck"></span><span><strong>Formulário de triagem</strong> e páginas de captação sob medida</span></li>
+          <li><span class="ck"></span><span><strong>Automação de qualificação</strong> no WhatsApp</span></li>
+          <li><span class="ck"></span><span><strong>Régua de nutrição</strong> para quem ainda não comprou</span></li>
+        </ul>
+
+        <span class="plan-group">Conteúdo e perfil</span>
+        <ul>
+          <li><span class="ck"></span><span><strong>Edição dos vídeos dos imóveis</strong> em vários formatos de anúncio</span></li>
+          <li><span class="ck"></span><span><strong>Estratégia de conteúdo</strong> para o perfil crescer como vitrine</span></li>
+          <li><span class="ck"></span><span><strong>Roteiros</strong> para você ou seu filmmaker gravarem</span></li>
+        </ul>
+
+        <span class="plan-group">Acompanhamento</span>
+        <ul>
+          <li><span class="ck"></span><span><strong>Painel de resultados</strong> com seus números atualizados</span></li>
+          <li><span class="ck"></span><span><strong>Reunião mensal de estratégia</strong> e contato direto comigo no WhatsApp</span></li>
+        </ul>
+
+        <a class="btn solid" href="https://wa.me/5548996006195?text=Ol%C3%A1%20Julio!%20Quero%20come%C3%A7ar%20o%20projeto." target="_blank" rel="noopener noreferrer">Quero começar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- POTENCIAL DE GANHO -->
+  <div class="payback-box">
+    <div class="pb-head">
+      <span class="pill" style="font-size:10px; padding:5px 12px;"><i></i>Conta pé no chão</span>
+      <h4>Projeção de retorno com leads qualificados em 90 dias</h4>
+    </div>
+
+    <div class="calc-row">
+      <div class="calc-mini"><span class="cm-l">Média regional</span><span class="cm-v">Médio &amp; Alto Padrão</span><span class="cm-s">Casas, apartamentos e lotes em Feira de Santana</span></div>
+      <div class="calc-mini"><span class="cm-l">Comissão líquida estimada</span><span class="cm-v">R$ 7 mil a R$ 10 mil</span><span class="cm-s">Média conservadora por fechamento na região</span></div>
+      <div class="calc-mini"><span class="cm-l">Total de qualificados gerados</span><span class="cm-v">27 leads com perfil</span><span class="cm-s">Filtrados na triagem ao longo de 90 dias</span></div>
+    </div>
+
+    <div class="pb-grid two">
+      <div class="pb-card">
+        <span class="pb-tier">Cenário Normal (4 a 5 clientes fechados em 90 dias)</span>
+        <div class="pb-finance">
+          <div class="pb-row">
+            <span class="pb-row-label">Comissões estimadas:</span>
+            <strong class="pb-row-val">R$ 28.000 a R$ 45.000</strong>
+          </div>
+          <div class="pb-row deduction">
+            <span class="pb-row-label">Mensalidade + anúncios (3 meses):</span>
+            <span class="ded-val">R$ 9.600</span>
+          </div>
+          <div class="pb-row net">
+            <span class="pb-row-label">Sobra no seu bolso:</span>
+            <span class="pb-val">R$ 18.400 a R$ 35.400</span>
+          </div>
+        </div>
+        <div class="pb-bar-wrap"><div class="pb-bar" style="width:55%;"></div></div>
+        <span class="pb-sub">Conversão realista de 4 a 5 clientes dentre os 27 qualificados entregues</span>
+      </div>
+      <div class="pb-card best">
+        <span class="pb-tier">Cenário Ideal (8 a 9 clientes fechados em 90 dias)</span>
+        <div class="pb-finance">
+          <div class="pb-row">
+            <span class="pb-row-label">Comissões estimadas:</span>
+            <strong class="pb-row-val">R$ 56.000 a R$ 80.000</strong>
+          </div>
+          <div class="pb-row deduction">
+            <span class="pb-row-label">Mensalidade + anúncios (3 meses):</span>
+            <span class="ded-val">R$ 9.600</span>
+          </div>
+          <div class="pb-row net">
+            <span class="pb-row-label">Sobra no seu bolso:</span>
+            <span class="pb-val">R$ 46.400 a R$ 70.400</span>
+          </div>
+        </div>
+        <div class="pb-bar-wrap"><div class="pb-bar best" style="width:85%;"></div></div>
+        <span class="pb-sub">Conversão acelerada com follow-up ativo e nutrição automática</span>
+      </div>
+    </div>
+
+    <p class="pb-foot">Com R$ 9.600 investidos no total dos 3 meses (mensalidade de R$ 1.700/mês + verba de anúncio), apenas 1 ou 2 fechamentos no período já cobrem 100% dos custos e colocam a sua operação no lucro real.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== BÔNUS ===== -->
+<section class="rv">
+  <span class="section-mark">BÔNUS</span>
+  <div class="head">
+    <span class="pill"><i></i>Incluso sem custo extra</span>
+    <h2>6 entregas que já vêm junto na implementação.</h2>
+    <p class="sub">Ativos que ficam com você e continuam trabalhando pela sua marca.</p>
+  </div>
+
+  <div class="bonus-banner">
+    <span class="bb-l"><span class="bb-dot"></span>Entregues no primeiro mês de operação</span>
+    <span class="bb-r">Valor de mercado somado: R$ 11.400</span>
+  </div>
+
+  <div class="bonus-grid">
+    <div class="card bonus-card"><span class="badge-b">Bônus 01 · Sistema</span><h4>CRM próprio da sua operação</h4><p>Seu sistema de clientes, com funil, histórico e status de cada negociação. É seu, sem mensalidade de software.</p><span class="val">Valor de mercado: R$ 4.000</span></div>
+    <div class="card bonus-card"><span class="badge-b">Bônus 02 · Página</span><h4>Landing page de portfólio</h4><p>Página rápida com seus imóveis em destaque e botão direto para a triagem. Ótima para usar no link da bio.</p><span class="val">Valor de mercado: R$ 2.200</span></div>
+    <div class="card bonus-card"><span class="badge-b">Bônus 03 · Triagem</span><h4>Formulário inteligente de qualificação</h4><p>Perguntas pensadas para o médio e alto padrão, com respostas chegando organizadas para você antes da conversa.</p><span class="val">Valor de mercado: R$ 1.500</span></div>
+    <div class="card bonus-card"><span class="badge-b">Bônus 04 · Busca local</span><h4>Google Meu Negócio otimizado</h4><p>Seu perfil aparecendo para quem procura corretora de imóveis em Feira de Santana e região.</p><span class="val">Valor de mercado: R$ 1.200</span></div>
+    <div class="card bonus-card"><span class="badge-b">Bônus 05 · Conteúdo</span><h4>Banco de roteiros para o perfil</h4><p>Roteiros de vídeos sobre imóveis e dores reais dos compradores locais, prontos para gravar.</p><span class="val">Valor de mercado: R$ 1.000</span></div>
+    <div class="card bonus-card"><span class="badge-b">Bônus 06 · Pós-venda</span><h4>Régua de indicações</h4><p>Mensagens automáticas para clientes que compraram com você, pedindo avaliação e indicação.</p><span class="val">Valor de mercado: R$ 1.500</span></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== CRONOGRAMA DE IMPLANTAÇÃO ===== -->
+<section class="rv">
+  <div class="head">
+    <span class="pill"><i></i>Cronograma de Implantação</span>
+    <h2>Como a sua estrutura entra no ar, mês a mês.</h2>
+    <p class="sub">Um plano de subida progressiva para configurar a parte técnica, aprender os dados de público e deixar toda a operação rodando a 100%.</p>
+  </div>
+
+  <div class="guar-container">
+    <div class="guar-glass-box">
+      <div style="text-align:center; padding-bottom:20px; border-bottom:1px solid var(--line);">
+        <span style="font-family:var(--mono); font-size:10.5px; color:var(--g); letter-spacing:.18em; text-transform:uppercase; font-weight:800;">Evolução da Estrutura</span>
+        <h3 style="font-size:20px; margin-top:6px; color:var(--w);">As etapas de subida da sua operação digital</h3>
+      </div>
+
+      <div class="guar-cards-grid">
+        <div class="guar-card">
+          <div class="gc-head"><span class="gc-tier">Mês 1 · Primeiros 30 dias</span><span class="gc-badge">Setup &amp; Início</span></div>
+          <ul>
+            <li><span class="ck"></span><span><strong>Configurações iniciais</strong> e alinhamento de acessos</span></li>
+            <li><span class="ck"></span><span><strong>Rastreamento e API de Conversões</strong> instalados</span></li>
+            <li><span class="ck"></span><span><strong>Formulário de triagem</strong> publicado</span></li>
+            <li><span class="ck"></span><span><strong>1ª parte da estrutura no ar</strong>: primeiras campanhas rodando e coletando os primeiros dados de público</span></li>
+          </ul>
+        </div>
+        <div class="guar-card">
+          <div class="gc-head"><span class="gc-tier">Mês 2 · Dias 31 a 60</span><span class="gc-badge">Expansão</span></div>
+          <ul>
+            <li><span class="ck"></span><span><strong>2ª parte da operação no ar</strong> com campanhas refinadas</span></li>
+            <li><span class="ck"></span><span><strong>Automação de qualificação</strong> ativa no WhatsApp</span></li>
+            <li><span class="ck"></span><span><strong>Landing page de portfólio</strong> publicada</span></li>
+            <li><span class="ck"></span><span><strong>Retroalimentação dos primeiros leads</strong> para treinar a Meta</span></li>
+          </ul>
+        </div>
+        <div class="guar-card featured">
+          <div class="gc-head"><span class="gc-tier">Mês 3 · Dias 61 a 90</span><span class="gc-badge">100% Rodando</span></div>
+          <ul>
+            <li><span class="ck"></span><span><strong>CRM próprio finalizado</strong> e com toda a base integrada</span></li>
+            <li><span class="ck"></span><span><strong>Régua de nutrição contínua</strong> rodando automaticamente</span></li>
+            <li><span class="ck"></span><span><strong>Operação completa rodando a 100%</strong> de forma madura e escalável</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guar-shield-callout">
+        <div class="guar-shield-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a8e83e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="guar-shield-text">
+          <h5>Compromisso de Entrega &amp; Acompanhamento</h5>
+          <p>Toda a montagem da infraestrutura técnica, automações, formulários e inteligência de tráfego é executada diretamente por mim. Você acompanha o progresso semana a semana enquanto atende os clientes qualificados que chegam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== QUEM EXECUTA ===== -->
+<section class="rv">
+  <div class="head">
+    <span class="pill"><i></i>Quem vai tocar sua operação</span>
+    <h2>Tráfego, tecnologia e estratégia na mesma pessoa.</h2>
+    <p class="sub">Mais de 9 anos entre tecnologia, desenvolvimento e aquisição de clientes, no Brasil e fora dele.</p>
+  </div>
+
+  <div class="mq" aria-label="Áreas de atuação">
+    <div class="mqin">
+      <span>+9 anos em tecnologia</span><span>+R$ 150 mil gerenciados em anúncios</span><span>Sócio-fundador da BudMed</span><span>Reserva Rio de Contas</span><span>Vitta Náutica (BRP)</span><span>Conrado Imobiliária</span><span>Royal Enfield Bahia</span><span>Front-end, back-end e banco de dados</span><span>Automação e inteligência</span>
+      <span>+9 anos em tecnologia</span><span>+R$ 150 mil gerenciados em anúncios</span><span>Sócio-fundador da BudMed</span><span>Reserva Rio de Contas</span><span>Vitta Náutica (BRP)</span><span>Conrado Imobiliária</span><span>Royal Enfield Bahia</span><span>Front-end, back-end e banco de dados</span><span>Automação e inteligência</span>
+    </div>
+  </div>
+
+  <div class="bento">
+    <div class="card disc"><div class="glow"></div><span class="n">Tráfego pago</span><h3>+R$ 150 mil em anúncios</h3><p>Experiência real gerenciando verba em segmentos de ticket alto, onde cada lead precisa valer a pena.</p></div>
+    <div class="card disc"><div class="glow"></div><span class="n">Empreendedor</span><h3>Sócio-fundador da BudMed</h3><p>Ajudei a construir uma healthtech do zero até o lançamento oficial com evento em São Paulo e captação relevante.</p></div>
+    <div class="card disc"><div class="glow"></div><span class="n">Setor Imobiliário &amp; Marcas</span><h3>Reserva Rio de Contas e Conrado</h3><p>Experiência prática na estruturação de aquisição e posicionamento no mercado imobiliário e marcas de prestígio.</p></div>
+    <div class="card disc"><div class="glow"></div><span class="n">Código próprio</span><h3>Não dependo de ferramenta pronta</h3><p>Quem desenha a estratégia é quem programa as integrações e automações. Se a sua operação precisar, eu construo.</p></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="rv" id="comecar" style="text-align:center; padding-top:clamp(60px, 8vw, 110px);">
+  <span class="pill"><i></i>Próximo passo</span>
+  <h2 style="margin:20px auto 0; max-width:20ch">Vamos colocar sua vitrine para trabalhar a seu favor?</h2>
+  <p class="sub" style="margin-left:auto; margin-right:auto;">Aprovando, começo a implementação na mesma semana. Em 30 dias a primeira parte está no ar e os primeiros clientes qualificados chegando.</p>
+  <a class="btn solid" href="https://wa.me/5548996006195?text=Ol%C3%A1%20Julio,%20aprovo%20a%20proposta.%20Vamos%20come%C3%A7ar!" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:40px; padding:20px 56px; font-size:13px;">Aprovar proposta</a>
+</section>
+
+<footer>
+  <p>Julio Souza · Gestão de Performance &amp; Tecnologia</p>
+  <p>Proposta emitida exclusivamente para Cláudia Santana · Outubro de 2026</p>
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  /* ===== 1. THREE.JS BG ANIMATION (3D Wave Grid + Touch Aware) ===== */
+  var canvas = document.getElementById("webgl-bg");
+  if (canvas && typeof THREE !== "undefined") {
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 200;
+    camera.position.y = 80;
+    camera.lookAt(0, 0, 0);
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    var isMobile = window.innerWidth < 768;
+    var AMOUNTX = isMobile ? 25 : 40;
+    var AMOUNTY = isMobile ? 25 : 40;
+    var SEP = isMobile ? 16 : 12;
+    var numParticles = AMOUNTX * AMOUNTY;
+
+    var positions = new Float32Array(numParticles * 3);
+    var i = 0;
+
+    for (var ix = 0; ix < AMOUNTX; ix++) {
+      for (var iy = 0; iy < AMOUNTY; iy++) {
+        positions[i] = ix * SEP - ((AMOUNTX * SEP) / 2);
+        positions[i + 1] = 0;
+        positions[i + 2] = iy * SEP - ((AMOUNTY * SEP) / 2);
+        i += 3;
+      }
+    }
+
+    var geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    var material = new THREE.PointsMaterial({
+      color: 0xa8e83e,
+      size: isMobile ? 2.2 : 1.8,
+      transparent: true,
+      opacity: 0.35
+    });
+
+    var particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    var count = 0;
+    var mouseX = 0, mouseY = 0;
+
+    function handleMove(clientX, clientY) {
+      mouseX = (clientX - window.innerWidth / 2) * 0.04;
+      mouseY = (clientY - window.innerHeight / 2) * 0.04;
+    }
+
+    window.addEventListener('mousemove', function(e) { handleMove(e.clientX, e.clientY); });
+    window.addEventListener('touchmove', function(e) {
+      if (e.touches.length > 0) handleMove(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+
+    function animate3D() {
+      requestAnimationFrame(animate3D);
+
+      count += 0.03;
+      var pos = particles.geometry.attributes.position.array;
+      var index = 0;
+
+      for (var ix = 0; ix < AMOUNTX; ix++) {
+        for (var iy = 0; iy < AMOUNTY; iy++) {
+          pos[index + 1] = (Math.sin((ix + count) * 0.3) * 8) + (Math.sin((iy + count) * 0.5) * 8);
+          index += 3;
+        }
+      }
+
+      particles.geometry.attributes.position.needsUpdate = true;
+      camera.position.x += (mouseX - camera.position.x) * 0.03;
+      camera.position.y += (-mouseY + 80 - camera.position.y) * 0.03;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+
+    animate3D();
+
+    window.addEventListener('resize', function() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+
+  /* ===== 2. GSAP & SCROLL TRIGGER ===== */
+  if (typeof gsap !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Scroll Reveal Geral
+    gsap.utils.toArray('.rv').forEach(function(elem) {
+      gsap.fromTo(elem, 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 0.9, ease: "power2.out", 
+          scrollTrigger: { trigger: elem, start: "top 88%", toggleActions: "play none none none" }
+        }
+      );
+    });
+
+    // Barras de retorno e de acumulado crescem ao entrar na tela
+    gsap.utils.toArray('.roi-fill').forEach(function(bar) {
+      ScrollTrigger.create({
+        trigger: bar,
+        start: "top 92%",
+        onEnter: function() { bar.style.width = bar.dataset.w; }
+      });
+    });
+
+    gsap.utils.toArray('.acc-col').forEach(function(col, i) {
+      ScrollTrigger.create({
+        trigger: col,
+        start: "top 92%",
+        onEnter: function() {
+          var b = col.querySelector('.acc-bar');
+          if (b) setTimeout(function() { b.style.height = b.dataset.h; }, i * 130);
+        }
+      });
+    });
+
+    // Pilhas do gráfico de composição crescem juntas
+    gsap.utils.toArray('.mixstack').forEach(function(st, i) {
+      var target = st.style.height;
+      st.style.height = "0%";
+      ScrollTrigger.create({
+        trigger: st.closest('.mixgrid') || st,
+        start: "top 85%",
+        onEnter: function() { setTimeout(function() { st.style.height = target; }, i * 140); }
+      });
+    });
+
+    // Contadores Numéricos Animados (Crescendo do zero até o verde)
+    function fmt(n) { return n.toLocaleString("pt-BR"); }
+
+    gsap.utils.toArray('[data-count]').forEach(function(el) {
+      var target = parseFloat(el.dataset.count);
+      var isGreen = el.dataset.green === "1";
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 90%",
+        onEnter: function() {
+          var obj = { val: 0 };
+          gsap.to(obj, {
+            val: target,
+            duration: 1.6,
+            ease: "power2.out",
+            onUpdate: function() {
+              el.textContent = fmt(Math.round(obj.val));
+              if (isGreen) {
+                var progress = obj.val / target;
+                var r = Math.round(150 + (168 - 150) * progress);
+                var g = Math.round(150 + (232 - 150) * progress);
+                var b = Math.round(150 + (62 - 150) * progress);
+                el.style.color = "rgb(" + r + "," + g + "," + b + ")";
+              }
+            }
+          });
+        }
+      });
+    });
+  }
+
+  /* ===== 3. DASHBOARD MES A MES ===== */
+  var periodBtns = document.querySelectorAll("#periodSelector .ladder-step");
+  var dataMap = {
+    "30": { note: "Mês 1: a Meta ainda está aprendendo quem é o seu comprador. O custo por lead é mais alto e cai conforme os dados de qualificação voltam para a plataforma.", alcance: "29.000", leads: 20, cpa: "Custo por lead: R$ 60", qual: 6, rate: "30% passam na triagem", seg: "+150", mult: "R$ 200", net: "6" },
+    "60": { note: "Mês 2: com os primeiros leads qualificados enviados de volta pela API, a Meta passa a entregar o anúncio para pessoas mais parecidas com quem tem perfil de compra.", alcance: "31.000", leads: 25, cpa: "Custo por lead: R$ 48", qual: 9, rate: "36% passam na triagem", seg: "+220", mult: "R$ 133", net: "9" },
+    "90": { note: "Mês 3: campanhas maduras, criativos vencedores identificados e custo por lead qualificado na metade do primeiro mês.", alcance: "33.000", leads: 30, cpa: "Custo por lead: R$ 40", qual: 12, rate: "40% passam na triagem", seg: "+300", mult: "R$ 100", net: "12" }
+  };
+  function setTxt(id, v) { var e = document.getElementById(id); if (e) e.textContent = v; }
+  periodBtns.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      periodBtns.forEach(function(b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      var d = dataMap[btn.dataset.days];
+      if (!d) return;
+      setTxt("phaseNote", d.note);
+      setTxt("kpiAlcance", d.alcance);
+      setTxt("kpiLeads", d.leads);
+      setTxt("kpiCpa", d.cpa);
+      setTxt("kpiQual", d.qual);
+      setTxt("kpiQualRate", d.rate);
+      setTxt("kpiSeg", d.seg);
+      setTxt("roiMult", d.mult);
+      setTxt("roiNet", d.net);
+      document.querySelectorAll(".acc-col").forEach(function(c) {
+        c.classList.toggle("active", c.dataset.phase === btn.dataset.days);
+      });
+    });
+  });
+
+  /* ===== 4. GLOW EFFECT NOS CARDS ===== */
+  if (window.matchMedia("(hover:hover)").matches) {
+    document.querySelectorAll(".card").forEach(function(card) {
+      var g = card.querySelector(".glow");
+      if (!g) return;
+      card.addEventListener("mousemove", function(ev) {
+        var r = card.getBoundingClientRect();
+        g.style.left = (ev.clientX - r.left) + "px";
+      });
+      card.addEventListener("mouseleave", function() {
+        g.style.left = "50%";
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>

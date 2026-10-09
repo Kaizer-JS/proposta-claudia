@@ -1,0 +1,11 @@
+# Logs e temporários
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+
+# Arquivos brutos de áudio e PDFs pesados (opcional para manter o repo leve)
+*.ogg
+*.wav
+*.pdf
+Reunião*

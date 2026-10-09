@@ -1,0 +1,12 @@
+{
+  "name": "proposta-claudia",
+  "version": "1.0.0",
+  "description": "Proposta Comercial · Gestão de Performance e Tecnologia · Cláudia Santana",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Julio Souza",
+  "license": "ISC"
+}
